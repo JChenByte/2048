@@ -51,7 +51,8 @@ public class _2048 {
 
 	// Constructor
 	public _2048() {
-		JOptionPane.showMessageDialog(null, "This is a simple 2048 demo. \nCreated by Jie Chen.");
+		JOptionPane.showMessageDialog(null, "This is a simple 2048 demo. "
+				+ "\nCreated by Jie Chen.");
 
 		// init the game.
 		init();
@@ -134,9 +135,11 @@ public class _2048 {
 						if (label[n].getText().equals("")) {
 							label[n].setText(label[n + 1].getText());
 							label[n + 1].setText("");
-						} else if (label[n].getText().equals(label[n + 1].getText())) {
+						} else if (label[n].getText().equals(label[n + 1]
+								.getText())) {
 							// Label n equals its value times 2.
-							label[n].setText(Integer.toString((Integer.parseInt(label[n].getText()) * 2)));
+							label[n].setText(Integer.toString((Integer.
+									parseInt(label[n].getText()) * 2)));
 							label[n + 1].setText("");
 
 							// Increase score when successfully merge two
@@ -174,9 +177,11 @@ public class _2048 {
 						if (label[n].getText().equals("")) {
 							label[n].setText(label[n - 1].getText());
 							label[n - 1].setText("");
-						} else if (label[n].getText().equals(label[n - 1].getText())) {
+						} else if (label[n].getText().equals(label[n - 1].
+								getText())) {
 							// Label n equals its value times 2.
-							label[n].setText(Integer.toString((Integer.parseInt(label[n].getText()) * 2)));
+							label[n].setText(Integer.toString((Integer.
+									parseInt(label[n].getText()) * 2)));
 							label[n - 1].setText("");
 
 							// Increase score when successfully merge two
@@ -213,9 +218,11 @@ public class _2048 {
 						if (label[n].getText().equals("")) {
 							label[n].setText(label[n + 4].getText());
 							label[n + 4].setText("");
-						} else if (label[n].getText().equals(label[n + 4].getText())) {
+						} else if (label[n].getText().equals(label[n + 4].
+								getText())) {
 							// Label n equals its value times 2.
-							label[n].setText(Integer.toString((Integer.parseInt(label[n].getText()) * 2)));
+							label[n].setText(Integer.toString((Integer.
+									parseInt(label[n].getText()) * 2)));
 							label[n + 4].setText("");
 
 							// Increase score when successfully merge two
@@ -253,9 +260,11 @@ public class _2048 {
 						if (label[n].getText().equals("")) {
 							label[n].setText(label[n - 4].getText());
 							label[n - 4].setText("");
-						} else if (label[n].getText().equals(label[n - 4].getText())) {
+						} else if (label[n].getText().equals(label[n - 4].
+								getText())) {
 							// Label n equals its value times 2.
-							label[n].setText(Integer.toString((Integer.parseInt(label[n].getText()) * 2)));
+							label[n].setText(Integer.toString((Integer.
+									parseInt(label[n].getText()) * 2)));
 							label[n - 4].setText("");
 
 							// Increase score when successfully merge two
@@ -330,10 +339,12 @@ public class _2048 {
 			Random gen = new Random();
 			if (multiplier <= 3) {
 				int newMultiplier = gen.nextInt(multiplier) + 1;
-				label[key].setText(Integer.toString((int) Math.pow(2, newMultiplier)));
+				label[key].setText(Integer.toString((int) Math.pow(2, 
+						newMultiplier)));
 			} else {
 				int newMultiplier = gen.nextInt(4) + (multiplier - 3);
-				label[key].setText(Integer.toString((int) Math.pow(2, newMultiplier)));
+				label[key].setText(Integer.toString((int) Math.pow(2, 
+						newMultiplier)));
 			}
 		}
 	}
@@ -348,7 +359,7 @@ public class _2048 {
 				counter++;
 			}
 		}
-
+	
 		// If there is no more empty block.
 		if (counter == 0) {
 			status = false;
