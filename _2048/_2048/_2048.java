@@ -22,18 +22,17 @@
 
 package _2048;
 
-import java.util.Random;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.Random;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import java.util.*;
 
 public class _2048 {
 	private boolean status = true;
@@ -42,7 +41,7 @@ public class _2048 {
 
 	/* necessary components using JSwing. */
 	JLabel label[] = new JLabel[16];
-	JFrame frame = new JFrame("2048 Demo");
+	JFrame frame = new JFrame("A Simple 2048 Game");
 	JPanel main = new JPanel(new GridLayout(5, 4));
 	JButton left = new JButton("LEFT");
 	JButton right = new JButton("RIGHT");
@@ -51,9 +50,12 @@ public class _2048 {
 
 	// Constructor
 	public _2048() {
-		JOptionPane.showMessageDialog(null, "This is a simple 2048 demo. "
-				+ "\nCreated by Jie Chen.");
-
+		JOptionPane.showMessageDialog(null,
+				"This is a simple 2048 game created by Jie Chen.\ngithub.com/"
+				+ "JChenByte/2048");
+		JOptionPane.showMessageDialog(null,
+				"Instruction: \nPlease use the buttons on screen to control "
+				+ "the direction.");
 		// init the game.
 		init();
 	}
@@ -95,9 +97,11 @@ public class _2048 {
 			label[i] = new JLabel("", SwingConstants.CENTER);
 			label[i].setBorder(defaultBorder);
 			label[i].setFont(new Font("Serif", Font.PLAIN, 30));
-
+			label[i].setOpaque(true);
 			main.add(label[i]);
 		}
+
+		painter();
 
 		main.add(left);
 		main.add(right);
@@ -112,6 +116,7 @@ public class _2048 {
 
 		// Generate a new number at random location.
 		renderNewBlock();
+
 	}
 
 	/* Add action listener for left button. */
@@ -135,12 +140,20 @@ public class _2048 {
 						if (label[n].getText().equals("")) {
 							label[n].setText(label[n + 1].getText());
 							label[n + 1].setText("");
-						} else if (label[n].getText().equals(label[n + 1]
-								.getText())) {
+
+							/* Set background color. */
+							label[n].setBackground(getColor(n));
+							label[n + 1].setBackground(getColor(n + 1));
+						} else if (label[n].getText().equals(label[n + 1].
+								getText())) {
 							// Label n equals its value times 2.
 							label[n].setText(Integer.toString((Integer.
 									parseInt(label[n].getText()) * 2)));
 							label[n + 1].setText("");
+
+							/* Set background color. */
+							label[n].setBackground(getColor(n));
+							label[n + 1].setBackground(getColor(n + 1));
 
 							// Increase score when successfully merge two
 							// blocks.
@@ -177,12 +190,20 @@ public class _2048 {
 						if (label[n].getText().equals("")) {
 							label[n].setText(label[n - 1].getText());
 							label[n - 1].setText("");
-						} else if (label[n].getText().equals(label[n - 1].
-								getText())) {
+
+							/* Set background color. */
+							label[n].setBackground(getColor(n));
+							label[n - 1].setBackground(getColor(n - 1));
+						} else if (label[n].getText().equals(label[n - 1]
+								.getText())) {
 							// Label n equals its value times 2.
 							label[n].setText(Integer.toString((Integer.
 									parseInt(label[n].getText()) * 2)));
 							label[n - 1].setText("");
+
+							/* Set background color. */
+							label[n].setBackground(getColor(n));
+							label[n - 1].setBackground(getColor(n - 1));
 
 							// Increase score when successfully merge two
 							// blocks.
@@ -192,6 +213,7 @@ public class _2048 {
 					}
 				}
 			}
+
 			postAction();
 		}
 	}
@@ -208,8 +230,8 @@ public class _2048 {
 		// Only perform when the status is true.
 		if (status == true) {
 			for (int i = 12; i < 16; i++) {
-				for (int k = i; k >= i - (4 * 2); k = k - 4) {
-					for (int n = k - 4; n >= i - (4 * 3); n = n - 4) {
+				for (int k = i - 8; k <= i; k += 4) {
+					for (int n = k - 4; n >= i - (4 * 3); n -= 4) {
 
 						/*
 						 * If the block on the top is empty, or else if they
@@ -218,6 +240,11 @@ public class _2048 {
 						if (label[n].getText().equals("")) {
 							label[n].setText(label[n + 4].getText());
 							label[n + 4].setText("");
+
+							/* Set background color. */
+							label[n].setBackground(getColor(n));
+							label[n + 4].setBackground(getColor(n + 4));
+
 						} else if (label[n].getText().equals(label[n + 4].
 								getText())) {
 							// Label n equals its value times 2.
@@ -225,10 +252,14 @@ public class _2048 {
 									parseInt(label[n].getText()) * 2)));
 							label[n + 4].setText("");
 
+							/* Set background color. */
+							label[n].setBackground(getColor(n));
+							label[n + 4].setBackground(getColor(n + 4));
+
 							// Increase score when successfully merge two
 							// blocks.
 							score += Integer.parseInt(label[n].getText()) * 2;
-							System.out.println(score);
+							// System.out.println(score);
 						}
 					}
 				}
@@ -250,8 +281,8 @@ public class _2048 {
 		// Only perform when the status is true.
 		if (status == true) {
 			for (int i = 0; i < 4; i++) {
-				for (int k = i; k <= i + 12; k = k + 4) {
-					for (int n = (k + 4); n <= i + 12; n = n + 4) {
+				for (int k = i + 8; k >= i; k -= 4) {
+					for (int n = (k + 4); n <= i + 12; n += 4) {
 
 						/*
 						 * If the block below is empty, or else if they have
@@ -260,6 +291,11 @@ public class _2048 {
 						if (label[n].getText().equals("")) {
 							label[n].setText(label[n - 4].getText());
 							label[n - 4].setText("");
+
+							/* Set background color. */
+							label[n].setBackground(getColor(n));
+							label[n - 4].setBackground(getColor(n - 4));
+
 						} else if (label[n].getText().equals(label[n - 4].
 								getText())) {
 							// Label n equals its value times 2.
@@ -267,10 +303,14 @@ public class _2048 {
 									parseInt(label[n].getText()) * 2)));
 							label[n - 4].setText("");
 
+							/* Set background color. */
+							label[n].setBackground(getColor(n));
+							label[n - 4].setBackground(getColor(n - 4));
+
 							// Increase score when successfully merge two
 							// blocks.
 							score += Integer.parseInt(label[n].getText()) * 2;
-							System.out.println(score);
+							// System.out.println(score);
 						}
 					}
 				}
@@ -282,7 +322,6 @@ public class _2048 {
 
 	/* Perform postAction after each clicking action. */
 	private void postAction() {
-
 		isOver();
 		setMultiplier();
 		renderNewBlock();
@@ -293,25 +332,25 @@ public class _2048 {
 	 * calculating potential value for generated block.
 	 */
 	private void setMultiplier() {
-		if (score < 30) {
+		if (score < 40) {
 			multiplier = 1;
-		} else if ((score >= 30) && (score < 60)) {
+		} else if ((score >= 40) && (score < 120)) {
 			multiplier = 2;
-		} else if ((score >= 60) && score < (120)) {
+		} else if ((score >= 120) && (score < 280)) {
 			multiplier = 3;
-		} else if ((score >= 120) && score < (240)) {
+		} else if ((score >= 280) && (score < 600)) {
 			multiplier = 4;
-		} else if ((score >= 240) && score < (480)) {
+		} else if ((score >= 600) && (score < 1240)) {
 			multiplier = 5;
-		} else if ((score >= 480) && score < (960)) {
+		} else if ((score >= 1240) && (score < 2520)) {
 			multiplier = 6;
-		} else if ((score >= 960) && score < (1920)) {
+		} else if ((score >= 2520) && (score < 5080)) {
 			multiplier = 7;
-		} else if ((score >= 1920) && score < (3840)) {
+		} else if ((score >= 5080) && (score < 10200)) {
 			multiplier = 8;
-		} else if ((score >= 3820) && score < (7680)) {
+		} else if ((score >= 10200) && (score < 20440)) {
 			multiplier = 9;
-		} else if ((score >= 7680) && (score < (15360))) {
+		} else if ((score >= 20440) && (score < 40920)) {
 			multiplier = 10;
 		} else {
 			multiplier = 11;
@@ -339,14 +378,81 @@ public class _2048 {
 			Random gen = new Random();
 			if (multiplier <= 3) {
 				int newMultiplier = gen.nextInt(multiplier) + 1;
-				label[key].setText(Integer.toString((int) Math.pow(2, 
+				label[key].setText(Integer.toString((int) Math.pow(2,
 						newMultiplier)));
 			} else {
 				int newMultiplier = gen.nextInt(4) + (multiplier - 3);
-				label[key].setText(Integer.toString((int) Math.pow(2, 
+				label[key].setText(Integer.toString((int) Math.pow(2,
 						newMultiplier)));
 			}
+
+			// Set background color.
+			label[key].setBackground(getColor(key));
 		}
+	}
+
+	/* Paint the entier main JPanel. */
+	public void painter() {
+		for (int n = 0; n < 16; n++) {
+			label[n].setBackground(getColor(n));
+		}
+	}
+
+	/* Get color of block n. */
+	public Color getColor(int n) {
+
+		Color tempColor;
+
+		/*
+		 * Check if block n has a value, if yes, get the color that rep its
+		 * value.
+		 */
+		if (label[n].getText().equals("")) {
+			tempColor = Color.WHITE;
+		} else {
+			int num = Integer.parseInt(label[n].getText());
+
+			switch (num) {
+			case 2:
+				tempColor = new Color(141, 90, 151);
+				break;
+			case 4:
+				tempColor = new Color(128, 155, 206);
+				break;
+			case 8:
+				tempColor = new Color(254, 147, 140);
+				break;
+			case 16:
+				tempColor = new Color(127, 229, 203);
+				break;
+			case 32:
+				tempColor = new Color(226, 207, 234);
+				break;
+			case 64:
+				tempColor = new Color(244, 97, 151);
+				break;
+			case 128:
+				tempColor = new Color(78, 205, 196);
+				break;
+			case 256:
+				tempColor = new Color(215, 255, 171);
+				break;
+			case 512:
+				tempColor = new Color(239, 123, 69);
+				break;
+			case 1024:
+				tempColor = new Color(197, 174, 135);
+				break;
+			case 2048:
+				tempColor = new Color(183, 110, 121);
+				break;
+			default:
+				tempColor = new Color(216, 226, 220);
+				break;
+			}
+		}
+
+		return tempColor;
 	}
 
 	/* Check if the game is over */
@@ -359,7 +465,7 @@ public class _2048 {
 				counter++;
 			}
 		}
-	
+
 		// If there is no more empty block.
 		if (counter == 0) {
 			status = false;
