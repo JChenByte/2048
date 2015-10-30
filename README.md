@@ -12,11 +12,7 @@ Features:
  - Generator random number based on current score (Still working on Algorithm). 
  - Use buttons on screen to control movement.
  - Corresponding color for number appears on each block. (NEW!) 0.1.1alpha
-
-Planned Features:
------------------
- - Dispay current score.
- - Reset the game.
+ - Scoring system. (NEW!) 0.1.2alpha
 
 Author
 ------
