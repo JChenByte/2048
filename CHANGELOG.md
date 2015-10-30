@@ -1,3 +1,12 @@
+[0.1.2 alpha] - (10/30/2015)
+------------------
+### Added
+ - Display current score in game.
+ - Show final score on message dialog when game is over.
+ - Automatically exit the game when game is over.
+
+
+
 [0.1.1 alpha] - (10/27/2015)
 ------------------
 ### Added
