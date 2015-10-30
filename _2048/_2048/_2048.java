@@ -22,9 +22,11 @@
 
 package _2048;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,8 +43,14 @@ public class _2048 {
 
 	/* necessary components using JSwing. */
 	JLabel label[] = new JLabel[16];
+
+	JLabel leftEmpty = new JLabel("");
+	JLabel rightEmpty = new JLabel("");
+	JLabel scoreLeft = new JLabel("Score: ", SwingConstants.CENTER);
+	JLabel scoreRight = new JLabel("0", SwingConstants.CENTER);
+
 	JFrame frame = new JFrame("A Simple 2048 Game");
-	JPanel main = new JPanel(new GridLayout(5, 4));
+	JPanel main = new JPanel(new GridLayout(6, 4));
 	JButton left = new JButton("LEFT");
 	JButton right = new JButton("RIGHT");
 	JButton up = new JButton("UP");
@@ -51,18 +59,17 @@ public class _2048 {
 	// Constructor
 	public _2048() {
 		JOptionPane.showMessageDialog(null,
-				"This is a simple 2048 game created by Jie Chen.\ngithub.com/"
-				+ "JChenByte/2048");
+				"This is a simple 2048 game created by Jie Chen.\ngithub.com/" 
+		+ "JChenByte/2048");
 		JOptionPane.showMessageDialog(null,
-				"Instruction: \nPlease use the buttons on screen to control "
-				+ "the direction.");
+				"Instruction: \nPlease use the buttons on screen to control " 
+		+ "the direction.");
 		// init the game.
 		init();
 	}
 
 	/* init method. Load game window. */
 	public void init() {
-
 		Border defaultBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 
 		/* Set styles for control buttons */
@@ -91,6 +98,14 @@ public class _2048 {
 		right.addActionListener(new rightActionListener());
 		up.addActionListener(new upActionListener());
 		down.addActionListener(new downActionListener());
+		
+		scoreLeft.setFont(new Font("Serif", Font.PLAIN, 20));
+		scoreRight.setFont(new Font("Serif", Font.PLAIN, 20));
+
+		main.add(leftEmpty);
+		main.add(scoreLeft);
+		main.add(scoreRight);
+		main.add(rightEmpty);
 
 		/* Set styles for blocks */
 		for (int i = 0; i < 16; i++) {
@@ -194,8 +209,8 @@ public class _2048 {
 							/* Set background color. */
 							label[n].setBackground(getColor(n));
 							label[n - 1].setBackground(getColor(n - 1));
-						} else if (label[n].getText().equals(label[n - 1]
-								.getText())) {
+						} else if (label[n].getText().equals(label[n - 1].
+								getText())) {
 							// Label n equals its value times 2.
 							label[n].setText(Integer.toString((Integer.
 									parseInt(label[n].getText()) * 2)));
@@ -325,6 +340,10 @@ public class _2048 {
 		isOver();
 		setMultiplier();
 		renderNewBlock();
+
+		// Update Score
+		scoreRight.setText(Integer.toString(score));
+
 	}
 
 	/*
@@ -378,11 +397,11 @@ public class _2048 {
 			Random gen = new Random();
 			if (multiplier <= 3) {
 				int newMultiplier = gen.nextInt(multiplier) + 1;
-				label[key].setText(Integer.toString((int) Math.pow(2,
+				label[key].setText(Integer.toString((int) Math.pow(2, 
 						newMultiplier)));
 			} else {
 				int newMultiplier = gen.nextInt(4) + (multiplier - 3);
-				label[key].setText(Integer.toString((int) Math.pow(2,
+				label[key].setText(Integer.toString((int) Math.pow(2, 
 						newMultiplier)));
 			}
 
@@ -469,7 +488,14 @@ public class _2048 {
 		// If there is no more empty block.
 		if (counter == 0) {
 			status = false;
-			JOptionPane.showMessageDialog(null, "Game OVER!!!");
+
+			// Show message
+			JOptionPane.showMessageDialog(null, "Game Over. Your Final Score "
+					+ "is: " + score + ".");
+
+			// Exit the game
+			frame.setVisible(false);
+			frame.dispose();
 		}
 
 	}
