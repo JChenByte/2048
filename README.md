@@ -11,6 +11,7 @@ Features:
  - 2048 Core Components with GUI. 
  - Generator random number based on current score (Still working on Algorithm). 
  - Use buttons on screen to control movement.
+ - MVC Framework. (NEW!) 0.2.0alpha
  - Corresponding color for number appears on each block. (NEW!) 0.1.1alpha
  - Scoring system. (NEW!) 0.1.2alpha
 
