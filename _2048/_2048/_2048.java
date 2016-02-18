@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * Copyright (C) 2015, Jie Chen. github.com/JChen.Byte
  * 
@@ -19,6 +20,8 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER 
  * DEALINGS IN THE SOFTWARE. 
  */
+=======
+>>>>>>> origin/master
 package _2048;
 
 import java.awt.Color;
@@ -164,6 +167,13 @@ public class _2048 {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				JOptionPane.showMessageDialog(null,
+<<<<<<< HEAD
+=======
+						"This is a simple 2048 game created by Jie Chen.\nFork "
+						+ "this project on github.com/"
+								+ "JChenByte/2048");
+				JOptionPane.showMessageDialog(null,
+>>>>>>> origin/master
 						"Instruction: \nPlease use the buttons on screen to "
 						+ "control " + "the direction.");
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * Copyright (C) 2015, Jie Chen. github.com/JChenByte
  * 
@@ -20,6 +21,8 @@
  * DEALINGS IN THE SOFTWARE. 
  */
 
+=======
+>>>>>>> origin/master
 package _2048;
 
 import java.awt.Color;
