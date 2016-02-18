@@ -1,3 +1,14 @@
+[0.2.0 alpha] - (02/18/2016)
+------------------
+### Changed
+ - Rework Framework (Now in MVC).
+ - Optimize code by adding new methods to avoid code duplication.
+ 
+### Fixed
+ - Scoring bug that causes the score to be two times higher than the original score.
+
+
+ 
 [0.1.2 alpha] - (10/30/2015)
 ------------------
 ### Added
